@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Fair_Trade.GameClasses;
+using Fair_Trade.Windows.Menu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,10 +25,35 @@ namespace Fair_Trade
         public MainWindow()
         {
             InitializeComponent();
+            GameMode.FormatWindow(this);
+            this.Width = GameMode.GetResolution()[0];
+            this.Height = GameMode.GetResolution()[1];
         }
 
         private void Start_Game_Click(object sender, RoutedEventArgs e)
         {
+            GameIntroPage GIP = new GameIntroPage();
+            GIP.Show();
+            this.Close();
+        }
+
+        private void Shop_Click(object sender, RoutedEventArgs e)
+        {
+            InGameShop shop = new InGameShop();
+            shop.Show();
+            this.Close();
+        }
+
+        private void Game_Settings_Click(object sender, RoutedEventArgs e)
+        {
+           GameSettings settings = new GameSettings();
+            settings.Show();
+            this.Close();
+        }
+
+        private void Game_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -7,24 +7,36 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Download_Page.xaml.cs">
+    <Compile Update="Windows\Gameplay\Download_Page.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Game.xaml.cs">
+    <Compile Update="Windows\Gameplay\Game.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="GameIntroPage.xaml.cs">
+    <Compile Update="Windows\Menu\GameIntroPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Menu\GameSettings.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Windows\Menu\InGameShop.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Download_Page.xaml">
+    <Page Update="Windows\Gameplay\Download_Page.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Game.xaml">
+    <Page Update="Windows\Gameplay\Game.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="GameIntroPage.xaml">
+    <Page Update="Windows\Menu\GameIntroPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Menu\GameSettings.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Menu\InGameShop.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

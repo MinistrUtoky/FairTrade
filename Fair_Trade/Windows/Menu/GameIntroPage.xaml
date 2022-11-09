@@ -1,0 +1,38 @@
+﻿<Window x:Class="Fair_Trade.GameIntroPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fair_Trade"
+        mc:Ignorable="d"
+        Title="GameIntroPage" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="1" Grid.Row="1" x:Name="Play_Online">
+            <ImageBrush></ImageBrush>
+        </Button>
+        <Button Grid.Column="3" Grid.Row="1" x:Name="Play_With_Bots">
+            <ImageBrush></ImageBrush>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="3" x:Name="Play_On_One_Screen">
+            <ImageBrush></ImageBrush>
+        </Button>
+        <Button Grid.Column="3" Grid.Row="3" x:Name="Tutorial">
+            <ImageBrush></ImageBrush>
+        </Button>
+    </Grid>
+</Window>
