@@ -1,0 +1,7 @@
+1440x900
+Normal
+False
+100
+100
+True
+False

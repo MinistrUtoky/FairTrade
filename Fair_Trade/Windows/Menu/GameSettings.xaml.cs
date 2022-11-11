@@ -73,7 +73,6 @@ namespace Fair_Trade.Windows.Menu
                                     GameMode.SetResolution(width, height);
                                     GameMode.FormatWindow(this);
                                 }
-                                //sb.Append((element as Button).Content.ToString());
                             }
                             else if (element.GetType() == typeof(CheckBox))
                             {
@@ -87,19 +86,27 @@ namespace Fair_Trade.Windows.Menu
                                     GameMode.FormatWindow(this);
                                     this.Top = 0; this.Left = 0; 
                                 }
-                                
-                                //sb.Append((element as CheckBox).IsChecked.ToString());
+                                else if (parameter == "Animations")
+                                {
+                                    GameMode.SetAnimationsOn((element as CheckBox).IsChecked.Value);
+                                }
+                                else if (parameter == "Chat is blocked")
+                                {
+                                    GameMode.SetChatMode((element as CheckBox).IsChecked.Value);
+                                }
                             }
                             else if (element.GetType() == typeof(Grid))
                             {
-                                //sb.Append(((element as Grid).Children[0] as Slider).Value.ToString());
+                                if (parameter == "Music")
+                                    GameMode.SetMusicLevel(Int32.Parse(((element as Grid).Children[1] as TextBlock).Text.ToString()));
+                                if (parameter == "SFX")
+                                    GameMode.SetSFXLevel(Int32.Parse(((element as Grid).Children[1] as TextBlock).Text.ToString()));
                             }
-                            //sb.Append("\n");
                         }
                     }
                 }
             }
-            //throw new Exception(sb.ToString());
+            GameMode.SaveSettings();
         }
 
         private Grid SettingsElement(KeyValuePair<List<string>, Type> setting)
@@ -141,9 +148,9 @@ namespace Fair_Trade.Windows.Menu
                     IsSelectionRangeEnabled = true,
                 };
                 s.ValueChanged += Slider_ValueChanged;
-                TextBlock txtb = new TextBlock { Text = setting.Key[1], Foreground = Brushes.White, TextWrapping = TextWrapping.Wrap };
-               
+                TextBlock txtb = new TextBlock { Text = setting.Key[1], Foreground = Brushes.White, TextWrapping = TextWrapping.Wrap };           
                 CheckBox chb = new CheckBox { IsChecked = s.Value == 0.0 ? false : true };
+                chb.Click += SoundOn_CheckBox_Clicked;
                 gg.SetValue(Grid.ColumnProperty, 1);
                 s.SetValue(Grid.ColumnProperty, 0);
                 txtb.SetValue(Grid.ColumnProperty, 1);
@@ -200,8 +207,24 @@ namespace Fair_Trade.Windows.Menu
 
         private void DifficultyListView_SelectedIndexChanged(object sender, RoutedEventArgs e) => ((Difficulty_Popup.Parent as Grid).Children[1] as Button).Content = (sender as ListView).SelectedItem;
         private void ResolutionsListView_SelectedIndexChanged(object sender, RoutedEventArgs e) => ((Resolutions_Popup.Parent as Grid).Children[1] as Button).Content = (sender as ListView).SelectedItem;
-        private void Slider_ValueChanged(object sender, RoutedEventArgs e) => (((sender as Slider).Parent as Grid).Children[1] as TextBlock).Text = Math.Round((sender as Slider).Value, 2).ToString();
+        private void Slider_ValueChanged(object sender, RoutedEventArgs e) => (((sender as Slider).Parent as Grid).Children[1] as TextBlock).Text = Math.Round((sender as Slider).Value).ToString();
         public void Resolutions_Button_Click(object sender, RoutedEventArgs e) => Resolutions_Popup.IsOpen = true;
         public void Difficulty_Button_Click(object sender, RoutedEventArgs e) => Difficulty_Popup.IsOpen = true;
+        private void SoundOn_CheckBox_Clicked(object sender, RoutedEventArgs e)
+        {
+            Grid parentGrid = ((sender as CheckBox).Parent as Grid);
+            if (!(sender as CheckBox).IsChecked.Value)
+            {
+                (parentGrid.Children[0] as Slider).Value = 0;
+            }
+            else
+            {
+                if (((parentGrid.Parent as Grid).Children[0] as TextBlock).Text.ToString() == "Music")
+                    (parentGrid.Children[0] as Slider).Value = GameMode.GetMusicLevel();
+                else
+                    (parentGrid.Children[0] as Slider).Value = GameMode.GetSFXLevel();
+            }
+            (parentGrid.Children[1] as TextBlock).Text = (parentGrid.Children[0] as Slider).Value.ToString();
+        }
     }
 }
