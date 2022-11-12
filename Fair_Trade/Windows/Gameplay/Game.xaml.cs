@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fair_Trade.GameClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace Fair_Trade
 {
@@ -22,6 +24,21 @@ namespace Fair_Trade
         public Game()
         {
             InitializeComponent();
+            GameMode.FormatWindow(this);
+            DownloadingAwaiter();
         }
+        private async void DownloadingAwaiter()
+        {
+            await Task.Run(() => StartDownloading());
+        }
+
+        private void StartDownloading()
+        {
+            Download_Page dp = new Download_Page();
+            dp.ShowDialog();
+            Thread.Sleep(10000);
+            dp.Close();
+        }
+
     }
 }

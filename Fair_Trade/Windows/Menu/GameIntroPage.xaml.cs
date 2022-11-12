@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fair_Trade.GameClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,17 @@ namespace Fair_Trade
         public GameIntroPage()
         {
             InitializeComponent();
+            GameMode.FormatWindow(this);
         }
+        private void GameStart()
+        {
+            Game g = new Game();
+            g.Show();
+            this.Close();
+        }
+        private void Play_Online_Click(object sender, RoutedEventArgs e) => GameStart();
+        private void Play_With_Bots_Click(object sender, RoutedEventArgs e) => GameStart();
+        private void Play_On_One_Screen_Click(object sender, RoutedEventArgs e) => GameStart();
+        private void Tutorial_Click(object sender, RoutedEventArgs e) => GameStart();
     }
 }

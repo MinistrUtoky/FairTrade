@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fair_Trade"
         mc:Ignorable="d"
-        Title="Download_Page" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
+        Title="Download_Page" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
     <Grid>
-        
+        <TextBlock FontStretch="Expanded" Foreground="White" TextWrapping="Wrap">ДОВНЛОВДИНК</TextBlock>
     </Grid>
 </Window>

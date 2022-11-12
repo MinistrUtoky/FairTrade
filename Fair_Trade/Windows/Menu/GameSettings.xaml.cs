@@ -149,7 +149,7 @@ namespace Fair_Trade.Windows.Menu
                 };
                 s.ValueChanged += Slider_ValueChanged;
                 TextBlock txtb = new TextBlock { Text = setting.Key[1], Foreground = Brushes.White, TextWrapping = TextWrapping.Wrap };           
-                CheckBox chb = new CheckBox { IsChecked = s.Value == 0.0 ? false : true };
+                CheckBox chb = new CheckBox { IsChecked = s.Value == 0? false : true };
                 chb.Click += SoundOn_CheckBox_Clicked;
                 gg.SetValue(Grid.ColumnProperty, 1);
                 s.SetValue(Grid.ColumnProperty, 0);
@@ -207,9 +207,15 @@ namespace Fair_Trade.Windows.Menu
 
         private void DifficultyListView_SelectedIndexChanged(object sender, RoutedEventArgs e) => ((Difficulty_Popup.Parent as Grid).Children[1] as Button).Content = (sender as ListView).SelectedItem;
         private void ResolutionsListView_SelectedIndexChanged(object sender, RoutedEventArgs e) => ((Resolutions_Popup.Parent as Grid).Children[1] as Button).Content = (sender as ListView).SelectedItem;
-        private void Slider_ValueChanged(object sender, RoutedEventArgs e) => (((sender as Slider).Parent as Grid).Children[1] as TextBlock).Text = Math.Round((sender as Slider).Value).ToString();
         public void Resolutions_Button_Click(object sender, RoutedEventArgs e) => Resolutions_Popup.IsOpen = true;
         public void Difficulty_Button_Click(object sender, RoutedEventArgs e) => Difficulty_Popup.IsOpen = true;
+        private void Slider_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            if (((((sender as Slider).Parent as Grid).Children[1] as TextBlock).Text = Math.Round((sender as Slider).Value).ToString()) == "0")
+                (((sender as Slider).Parent as Grid).Children[2] as CheckBox).IsChecked = false;
+            else
+                (((sender as Slider).Parent as Grid).Children[2] as CheckBox).IsChecked = true;
+        }
         private void SoundOn_CheckBox_Clicked(object sender, RoutedEventArgs e)
         {
             Grid parentGrid = ((sender as CheckBox).Parent as Grid);
@@ -223,6 +229,8 @@ namespace Fair_Trade.Windows.Menu
                     (parentGrid.Children[0] as Slider).Value = GameMode.GetMusicLevel();
                 else
                     (parentGrid.Children[0] as Slider).Value = GameMode.GetSFXLevel();
+
+                if ((parentGrid.Children[0] as Slider).Value == 0) (parentGrid.Children[0] as Slider).Value = 1;
             }
             (parentGrid.Children[1] as TextBlock).Text = (parentGrid.Children[0] as Slider).Value.ToString();
         }

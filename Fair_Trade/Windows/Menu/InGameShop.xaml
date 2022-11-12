@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fair_Trade.Windows.Menu"
         mc:Ignorable="d"
-        Title="InGameShop" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
+        Title="InGameShop" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
     <Grid>
         
     </Grid>

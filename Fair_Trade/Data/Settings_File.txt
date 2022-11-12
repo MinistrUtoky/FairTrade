@@ -1,5 +1,5 @@
-1440x900
-Normal
+800x480
+Scam
 False
 100
 100

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.IO.Packaging;
+using System.Reflection;
 
 namespace Fair_Trade.GameClasses
 {
@@ -95,7 +97,24 @@ namespace Fair_Trade.GameClasses
             w.Width = _screenResolution[0];
             w.Height = _screenResolution[1];
         }
+        
 
+        public static void UploadSettings()
+        {
+            FileInfo fileInfo = new FileInfo(AppDomain.CurrentDomain.BaseDirectory);
+            string[] s = File.ReadAllText(fileInfo.Directory.Parent.Parent.Parent.FullName + @"\Data\Settings_File.txt").Split("\n");
+            string[] res = s[0].Split("x");
+            _screenResolution[0] = Int32.Parse(res[0]); _screenResolution[1] = Int32.Parse(res[1]);
+            _botsDifficulty = (s[1].TrimEnd());
+            if (s[2] == "True") _fullScreen = true;
+            else _fullScreen = false;
+            _musicLevel = Int32.Parse(s[3]);
+            _SFXLevel = Int32.Parse(s[4]);
+            if (s[5] == "True") _animationsOn = true;
+            else _animationsOn = false;
+            if (s[6] == "True") _chatIsBlocked = true;
+            else _chatIsBlocked = false;
+        }
         public static async void SaveSettings()
         {
             StringBuilder sb = new StringBuilder();

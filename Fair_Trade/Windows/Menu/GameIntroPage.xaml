@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fair_Trade"
         mc:Ignorable="d"
-        Title="GameIntroPage" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
+        Title="GameIntroPage" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -22,16 +22,16 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Column="1" Grid.Row="1" x:Name="Play_Online">
+        <Button Grid.Column="1" Grid.Row="1" x:Name="Play_Online" Click="Play_Online_Click">
             <ImageBrush></ImageBrush>
         </Button>
-        <Button Grid.Column="3" Grid.Row="1" x:Name="Play_With_Bots">
+        <Button Grid.Column="3" Grid.Row="1" x:Name="Play_With_Bots" Click="Play_With_Bots_Click">
             <ImageBrush></ImageBrush>
         </Button>
-        <Button Grid.Column="1" Grid.Row="3" x:Name="Play_On_One_Screen">
+        <Button Grid.Column="1" Grid.Row="3" x:Name="Play_On_One_Screen" Click="Play_On_One_Screen_Click">
             <ImageBrush></ImageBrush>
         </Button>
-        <Button Grid.Column="3" Grid.Row="3" x:Name="Tutorial">
+        <Button Grid.Column="3" Grid.Row="3" x:Name="Tutorial" Click="Tutorial_Click">
             <ImageBrush></ImageBrush>
         </Button>
     </Grid>

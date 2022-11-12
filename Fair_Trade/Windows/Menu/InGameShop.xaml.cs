@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fair_Trade.GameClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Fair_Trade.Windows.Menu
         public InGameShop()
         {
             InitializeComponent();
+            GameMode.FormatWindow(this);
         }
     }
 }

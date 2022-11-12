@@ -25,6 +25,7 @@ namespace Fair_Trade
         public MainWindow()
         {
             InitializeComponent();
+            GameMode.UploadSettings();
             GameMode.FormatWindow(this);
             this.Width = GameMode.GetResolution()[0];
             this.Height = GameMode.GetResolution()[1];

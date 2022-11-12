@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fair_Trade.GameClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace Fair_Trade
     /// </summary>
     public partial class Download_Page : Window
     {
-        public Download_Page()
+        internal Download_Page()
         {
             InitializeComponent();
+            GameMode.FormatWindow(this);
         }
     }
 }
