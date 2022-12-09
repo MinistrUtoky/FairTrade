@@ -60,3 +60,5 @@ C:\Users\Viqtop\source\repos\FairTrade\Fair_Trade\obj\Debug\net6.0-windows\refin
 C:\Users\Viqtop\source\repos\FairTrade\Fair_Trade\obj\Debug\net6.0-windows\Fair_Trade.pdb
 C:\Users\Viqtop\source\repos\FairTrade\Fair_Trade\obj\Debug\net6.0-windows\Fair_Trade.genruntimeconfig.cache
 C:\Users\Viqtop\source\repos\FairTrade\Fair_Trade\obj\Debug\net6.0-windows\ref\Fair_Trade.dll
+C:\Users\Viqtop\source\repos\Fair_Trade\Fair_Trade\obj\Debug\net6.0-windows\Windows\Menu\DecksBuildPage.g.cs
+C:\Users\Viqtop\source\repos\Fair_Trade\Fair_Trade\obj\Debug\net6.0-windows\Windows\Menu\DecksBuildPage.baml

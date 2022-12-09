@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Viqtop\source\repos\Fair_Trade\Fair_Trade\App.xaml
-6144513591
+7822580857
 
-15790679025
+281677881435
 194-1103864946
-MainWindow.xaml;Windows\Gameplay\Download_Page.xaml;Windows\Gameplay\Game.xaml;Windows\Menu\GameIntroPage.xaml;Windows\Menu\GameSettings.xaml;Windows\Menu\InGameShop.xaml;
+MainWindow.xaml;Windows\Gameplay\Download_Page.xaml;Windows\Gameplay\Game.xaml;Windows\Menu\DecksBuildPage.xaml;Windows\Menu\GameIntroPage.xaml;Windows\Menu\GameSettings.xaml;Windows\Menu\InGameShop.xaml;
 
 False
 

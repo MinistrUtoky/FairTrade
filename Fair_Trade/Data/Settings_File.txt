@@ -1,7 +1,7 @@
-800x480
-Scam
+960x640
+Normal
 False
-100
-100
-True
+0
+0
+False
 False

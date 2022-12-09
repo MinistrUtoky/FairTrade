@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.IO.Packaging;
 using System.Reflection;
+using Fair_Trade.GameClasses.GameBase.BasicCardMechanics;
 
 namespace Fair_Trade.GameClasses
 {
     public static class GameMode
     {
+        public static string gameMode;
+        private static List<Card> avaliableForDeckCards;
+
         private static int[] _screenResolution = new int[2] { 800, 480 };
         private static string _botsDifficulty = "Normal";
         private static bool _fullScreen = true;

@@ -1,4 +1,5 @@
 ﻿using Fair_Trade.GameClasses;
+using Fair_Trade.GameClasses.GameBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +13,29 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Fair_Trade.GameClasses.Engine;
 
 namespace Fair_Trade
 {
-    /// <summary>
-    /// Логика взаимодействия для Download_Page.xaml
-    /// </summary>
     public partial class Download_Page : Window
     {
+        private DownloadingScene _downloadingScene;
         internal Download_Page()
         {
             InitializeComponent();
             GameMode.FormatWindow(this);
+            _downloadingScene = new DownloadingScene();
+            _downloadingScene.GenerateScene();
+        }
+
+        public void Display()
+        {
+            foreach (GameObject2D gameObject in _downloadingScene._objectsInScene)
+                if (gameObject.objectType != null)
+                    if (gameObject.objectType == typeof(Image))
+                    {
+
+                    }
         }
     }
 }
