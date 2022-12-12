@@ -8,8 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Sprites\white_card.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Sprites\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Sprites\white_card.png" />
   </ItemGroup>
 
 </Project>

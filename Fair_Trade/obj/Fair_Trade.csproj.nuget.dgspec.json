@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Viqtop\\source\\repos\\Fair_Trade\\Fair_Trade\\Fair_Trade.csproj": {}
+    "C:\\Users\\Viqtop\\source\\repos\\FairTrade\\Fair_Trade\\Fair_Trade.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Viqtop\\source\\repos\\Fair_Trade\\Fair_Trade\\Fair_Trade.csproj": {
+    "C:\\Users\\Viqtop\\source\\repos\\FairTrade\\Fair_Trade\\Fair_Trade.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Viqtop\\source\\repos\\Fair_Trade\\Fair_Trade\\Fair_Trade.csproj",
+        "projectUniqueName": "C:\\Users\\Viqtop\\source\\repos\\FairTrade\\Fair_Trade\\Fair_Trade.csproj",
         "projectName": "Fair_Trade",
-        "projectPath": "C:\\Users\\Viqtop\\source\\repos\\Fair_Trade\\Fair_Trade\\Fair_Trade.csproj",
+        "projectPath": "C:\\Users\\Viqtop\\source\\repos\\FairTrade\\Fair_Trade\\Fair_Trade.csproj",
         "packagesPath": "C:\\Users\\Viqtop\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Viqtop\\source\\repos\\Fair_Trade\\Fair_Trade\\obj\\",
+        "outputPath": "C:\\Users\\Viqtop\\source\\repos\\FairTrade\\Fair_Trade\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -63,7 +63,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -25,15 +25,16 @@ namespace Fair_Trade
             InitializeComponent();
             GameMode.FormatWindow(this);
         }
-        private void GameStart()
+        private void GameStart(string gameMode)
         {
+            GameMode.gameMode = gameMode;
             Game g = new Game();
             g.Show();
             this.Close();
         }
-        private void Play_Online_Click(object sender, RoutedEventArgs e) => GameStart();
-        private void Play_With_Bots_Click(object sender, RoutedEventArgs e) => GameStart();
-        private void Play_On_One_Screen_Click(object sender, RoutedEventArgs e) => GameStart();
-        private void Tutorial_Click(object sender, RoutedEventArgs e) => GameStart();
+        private void Play_Online_Click(object sender, RoutedEventArgs e) => GameStart("Multiplayer");
+        private void Play_With_Bots_Click(object sender, RoutedEventArgs e) => GameStart("Bots");
+        private void Play_On_One_Screen_Click(object sender, RoutedEventArgs e) => GameStart("OneScreen");
+        private void Tutorial_Click(object sender, RoutedEventArgs e) => GameStart("Tutorial");
     }
 }

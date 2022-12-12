@@ -13,6 +13,9 @@
     <Compile Update="Windows\Gameplay\Game.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\Menu\DecksBuildPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Windows\Menu\GameIntroPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Gameplay\Game.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\Menu\DecksBuildPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\Menu\GameIntroPage.xaml">

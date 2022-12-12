@@ -1,4 +1,5 @@
 ﻿using Fair_Trade.GameClasses;
+using Fair_Trade.GameClasses.Engine;
 using Fair_Trade.Windows.Menu;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,6 @@ namespace Fair_Trade
             InitializeComponent();
             GameMode.UploadSettings();
             GameMode.FormatWindow(this);
-            this.Width = GameMode.GetResolution()[0];
-            this.Height = GameMode.GetResolution()[1];
         }
 
         private void Start_Game_Click(object sender, RoutedEventArgs e)
@@ -41,6 +40,12 @@ namespace Fair_Trade
         private void Shop_Click(object sender, RoutedEventArgs e)
         {
             InGameShop shop = new InGameShop();
+            shop.Show();
+            this.Close();
+        }
+        private void Deck_Builder_Click(object sender, RoutedEventArgs e)
+        {
+            DecksBuildPage shop = new DecksBuildPage();
             shop.Show();
             this.Close();
         }

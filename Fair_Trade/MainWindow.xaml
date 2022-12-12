@@ -19,22 +19,26 @@
         </Grid.RowDefinitions>
         <Canvas Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="2" x:Name="DancingShrek"></Canvas>
         <Image Grid.Column="0" Grid.RowSpan="3" Grid.ColumnSpan="3" x:Name="Main_Menu_Background"></Image>
-
+        
+        <Button VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1"
+                Grid.Row="0" Width="100" Height="100" x:Name="DeckBuilder" Click="Deck_Builder_Click">
+            <TextBlock Text="Deck"></TextBlock>
+        </Button>
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"
                 Grid.Row="2" Width="100" Height="100" x:Name="Shop" Click="Shop_Click">
-            <ImageBrush></ImageBrush>
+            <TextBlock Text="Shop"></TextBlock>
         </Button>
         <Button Grid.Row="0" Grid.Column="2" x:Name="Start_Game" Width="Auto" Height="Auto" 
                 Click="Start_Game_Click">
-            <ImageBrush></ImageBrush>
+            <TextBlock Text="Start"></TextBlock>
         </Button>
         <Button Grid.Row="1" Grid.Column="2" x:Name="Game_Settings" Width="Auto" Height="Auto"
                 Click="Game_Settings_Click">
-            <ImageBrush></ImageBrush>
+            <TextBlock Text="Settings"></TextBlock>
         </Button>
         <Button Grid.Row="2" Grid.Column="2" x:Name="Game_Exit" Width="Auto" Height="Auto"
                 Click="Game_Exit_Click">
-            <ImageBrush></ImageBrush>
+            <TextBlock Text="Exit"></TextBlock>
         </Button>
     </Grid>
 </Window>

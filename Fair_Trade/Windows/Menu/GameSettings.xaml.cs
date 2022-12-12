@@ -53,7 +53,6 @@ namespace Fair_Trade.Windows.Menu
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            //StringBuilder sb = new StringBuilder();
             foreach (object grid in Settings_Panel.Children)
             {
                 if (grid.GetType() == typeof(Grid))
@@ -84,7 +83,7 @@ namespace Fair_Trade.Windows.Menu
                                         ((Settings_Panel.Children[1] as Grid).Children[1] as Button).IsEnabled = true;
                                     GameMode.SetFullScreenMode((element as CheckBox).IsChecked.Value);
                                     GameMode.FormatWindow(this);
-                                    this.Top = 0; this.Left = 0; 
+                                    this.Top = System.Windows.SystemParameters.PrimaryScreenHeight/2 - this.Height/2; this.Left = System.Windows.SystemParameters.PrimaryScreenWidth / 2 - this.Width / 2; 
                                 }
                                 else if (parameter == "Animations")
                                 {
@@ -107,6 +106,9 @@ namespace Fair_Trade.Windows.Menu
                 }
             }
             GameMode.SaveSettings();
+            GameSettings newGS = new GameSettings();
+            newGS.Show();
+            this.Close();
         }
 
         private Grid SettingsElement(KeyValuePair<List<string>, Type> setting)

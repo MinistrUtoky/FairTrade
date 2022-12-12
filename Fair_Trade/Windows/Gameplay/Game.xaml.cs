@@ -13,32 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Threading;
+using Fair_Trade.GameClasses.GameBase;
+using Fair_Trade.GameClasses.Engine;
 
 namespace Fair_Trade
 {
-    /// <summary>
-    /// Логика взаимодействия для Game.xaml
-    /// </summary>
     public partial class Game : Window
     {
+        private CardGame _gameScene;
+
         public Game()
         {
             InitializeComponent();
             GameMode.FormatWindow(this);
-            DownloadingAwaiter();
-        }
-        private async void DownloadingAwaiter()
-        {
-            await Task.Run(() => StartDownloading());
-        }
+            _gameScene = new CardGame(this);
+            _gameScene.GenerateScene();
 
-        private void StartDownloading()
-        {
-            Download_Page dp = new Download_Page();
-            dp.ShowDialog();
-            Thread.Sleep(10000);
-            dp.Close();
+            Download_Page d = new Download_Page();
+            d.ShowDialog();
         }
-
     }
 }

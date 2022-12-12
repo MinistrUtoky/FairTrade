@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.IO.Packaging;
 using System.Reflection;
+using Fair_Trade.GameClasses.GameBase.BasicCardMechanics;
 
 namespace Fair_Trade.GameClasses
 {
     public static class GameMode
     {
+        public static string gameMode;
+        public static int maxFrameRate = 50;
+
         private static int[] _screenResolution = new int[2] { 800, 480 };
         private static string _botsDifficulty = "Normal";
         private static bool _fullScreen = true;
@@ -106,13 +110,13 @@ namespace Fair_Trade.GameClasses
             string[] res = s[0].Split("x");
             _screenResolution[0] = Int32.Parse(res[0]); _screenResolution[1] = Int32.Parse(res[1]);
             _botsDifficulty = (s[1].TrimEnd());
-            if (s[2] == "True") _fullScreen = true;
+            if (s[2][0] == 'T') _fullScreen = true;
             else _fullScreen = false;
             _musicLevel = Int32.Parse(s[3]);
             _SFXLevel = Int32.Parse(s[4]);
-            if (s[5] == "True") _animationsOn = true;
+            if (s[5][0] == 'T') _animationsOn = true;
             else _animationsOn = false;
-            if (s[6] == "True") _chatIsBlocked = true;
+            if (s[6][0] == 'T') _chatIsBlocked = true;
             else _chatIsBlocked = false;
         }
         public static async void SaveSettings()
