@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Game"  WindowStyle="None" WindowStartupLocation="CenterScreen"
         AllowsTransparency="True" Background="Black" Height="450" Width="800">
-    <Grid>     
+    <!--<Grid>     
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="5*"/>
@@ -23,7 +23,6 @@
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <TextBox>GAY</TextBox>
             
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -76,5 +75,8 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Grid>
-    </Grid>
+    </Grid>-->
+    <Canvas x:Name="mainCanvas">
+        
+    </Canvas>
 </Window>

@@ -63,8 +63,8 @@ namespace Fair_Trade.GameClasses.GameBase
             
             _firstCardThrower.AssignAudioSource(new AudioSource(AudioSource.AudioType.OneTime));
             _secondCardThrower.AssignAudioSource(new AudioSource(AudioSource.AudioType.OneTime));
-            _firstCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/1.wav"));
-            _secondCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/2.wav"));
+            _firstCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/1.wav", AudioSource.AudioType.OneTime));
+            _secondCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/2.wav", AudioSource.AudioType.OneTime));
             //_firstCardThrower.AudioSource.SoundPlayer.Tag = _sceneViewer;
             //_secondCardThrower.AudioSource.SoundPlayer.Tag = _sceneViewer;
 

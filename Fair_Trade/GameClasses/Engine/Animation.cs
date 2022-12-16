@@ -36,7 +36,7 @@ namespace Fair_Trade.GameClasses.Engine
         public void GoToFrame(int frame) => _currentFramePos = frame % _frames.Count;
         public Image GetNextFrame()
         {
-            if (_canBePlayed )
+            if (_canBePlayed && GameMode.GetAnimationsOn())
             {
                 if (_currentFramePos > _frames.Count - 1)
                 {

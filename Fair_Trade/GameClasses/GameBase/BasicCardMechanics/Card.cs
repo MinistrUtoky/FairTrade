@@ -19,7 +19,7 @@ namespace Fair_Trade.GameClasses.GameBase.BasicCardMechanics
         {
             _price = price;
             _owner = owner;
-            parentalScene = _owner._parentScene;
+            _parentalScene = parentalScene;
             _canBePlayed = canBePlayed;
             _sprite = faceSprite;
             objectType = GameObjectType.Visible;

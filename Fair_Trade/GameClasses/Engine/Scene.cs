@@ -72,13 +72,15 @@ namespace Fair_Trade.GameClasses.Engine
             if (imageSources.Length == 0) imageSources = Directory.GetFiles(folderName, "*.jpg", SearchOption.TopDirectoryOnly);
             List<Image> newAnimation = new List<Image>();
             foreach (string imageSource in imageSources) newAnimation.Add(CreateSprite(Path.Combine(folderName, Path.GetFileName(imageSource))));
-            //throw new Exception(newAnimation.Count.ToString());//String.Join(" ", imageSources));
             return newAnimation;
         }
-        public MediaPlayer CreateAudio(string audioSrc)
+        public MediaPlayer CreateAudio(string audioSrc, AudioSource.AudioType audioType)
         {
-            MediaPlayer mp = new MediaPlayer();     
-            mp.Open(new Uri(audioSrc, UriKind.Relative));
+            MediaPlayer mp = new MediaPlayer();
+            Uri uri = new Uri(Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName) + audioSrc);
+            mp.Open(uri);
+            if (audioType == AudioSource.AudioType.OneTime) mp.Volume = 0.5 * (double)GameMode.GetSFXLevel()/100.0;
+            else mp.Volume = 0.5 * (double)GameMode.GetMusicLevel() / 100.0;
             return mp;
         }
     }

@@ -25,7 +25,7 @@
             <TextBlock Text="Deck"></TextBlock>
         </Button>
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1"
-                Grid.Row="2" Width="100" Height="100" x:Name="Shop" Click="Shop_Click"> <!--Click="Shop_Click"-->
+                Grid.Row="2" Width="100" Height="100" x:Name="Shop"> <!--Click="Shop_Click"-->
             <TextBlock Text="Shop"></TextBlock>
         </Button>
         <Button Grid.Row="0" Grid.Column="2" x:Name="Start_Game" Width="Auto" Height="Auto" 

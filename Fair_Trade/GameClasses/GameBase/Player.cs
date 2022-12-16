@@ -16,7 +16,6 @@ namespace Fair_Trade.GameClasses.GameBase
         public CardGame _parentScene;
         public CardGame.PlayerClass playerClass;
         private bool _isPlayersTurn;
-        public List<Card> startDeck;
 
         private List<Card> _cardsInDeck;
         private List<Card> _cardsInHand;
@@ -30,11 +29,8 @@ namespace Fair_Trade.GameClasses.GameBase
 
         private Random _rand = new Random();
 
-        public Player(Type playerType, CardGame parentScene, CardGame.PlayerClass newPlayerClass)
+        public Player(Type playerType, CardGame parentScene, CardGame.PlayerClass newPlayerClass, List<Card> startDeck)
         {
-            // TEMPORARY!!!
-            startDeck = parentScene.defaultStartDeck;
-            // TEMPORARY!!!
             type = playerType;
             _parentScene = parentScene;
             if (newPlayerClass == null)
@@ -46,11 +42,11 @@ namespace Fair_Trade.GameClasses.GameBase
             _cardsInDump = new List<Card>();
             _handsCapacity = playerClass._startHandsCapacity; _health = playerClass._startHealth;
             _money = playerClass._startMoney;
-            UploadDeck();
+            UploadDeck(startDeck);
             ShuffleDeck();
         }
 
-        private void UploadDeck()
+        private void UploadDeck(List<Card> startDeck)
         {
             startDeck.ForEach(c => _cardsInDeck.Add(c));
         }

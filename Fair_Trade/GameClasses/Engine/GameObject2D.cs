@@ -96,11 +96,7 @@ namespace Fair_Trade.GameClasses.Engine
         public Image Sprite { get { return _sprite; } }
         
         public void GoToNextFrameSprite() {
-            //await Task.Run(() =>
-            //{
-               // Task.Delay(1000/_animation.FrameRate - 1000/GameMode.maxFrameRate).Wait();
-                if (_animation != null) _sprite = _animation.GetNextFrame();
-            //});
+            if (_animation != null) _sprite = _animation.GetNextFrame();
         }
         public Animation Animation { get { return _animation; } }
         public void AssignAnimation(List<Image> animation) => _animation = new Animation(Animation.AnimationType.Loop, animation); 

@@ -36,7 +36,6 @@ namespace Fair_Trade.GameClasses.GameBase.AIs
                     if (!ignoreCard)
                         if (_owner.collider.CheckOnIntersectionWith(_pseudoCardsCollider))
                         {
-                            //_pseudoCardsCollider.SetRBToStatic();
                             _pseudoCardsCollider.Stop();
                             _pseudoCardsCollider.AddVelocity(new Vector2(_owner.Position().x < _owner._parentalScene.SceneViewerWidth() / 2? 40: -40, 30));
                             _pseudoCardsCollider.Parent().SetRotationSpeed(-_pseudoCardsCollider.Parent().GetRotationSpeed());                          

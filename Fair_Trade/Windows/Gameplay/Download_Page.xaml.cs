@@ -28,7 +28,6 @@ namespace Fair_Trade
     public partial class Download_Page : Window
     {
         private DownloadingScene _downloadingScene;
-
         private bool collidersAreVisible = false;
         internal Download_Page()
         {
@@ -48,6 +47,7 @@ namespace Fair_Trade
                 {
                     Draw(gameObject);
                     DrawCollider(gameObject);
+                    PlaySound(gameObject);
                 }
         }
         private void Draw(GameObject2D gameObject)
@@ -77,6 +77,16 @@ namespace Fair_Trade
                     rt.CenterX = (gameObject.collider.Pivot().x - gameObject.collider.Position().x); rt.CenterY = (-gameObject.collider.Pivot().y + gameObject.collider.Position().y);
                     r.RenderTransform = rt;
                     downloadingPageCanvas.Children.Add(r);
+                }
+        }
+
+        private void PlaySound(GameObject2D gameObject)
+        {
+            if (gameObject.AudioSource != null)
+                if (gameObject.AudioSource.isPlaying)
+                {
+                    gameObject.AudioSource.MediaPlayer.Play();
+                    gameObject.AudioSource.isPlaying = false;
                 }
         }
 
