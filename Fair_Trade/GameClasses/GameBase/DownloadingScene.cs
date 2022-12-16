@@ -14,6 +14,7 @@ using Fair_Trade.GameClasses.GameBase.BasicCardMechanics;
 using Fair_Trade.GameClasses.GameBase.AIs;
 using Microsoft.VisualBasic;
 using System.Threading;
+using System.Windows.Media;
 
 namespace Fair_Trade.GameClasses.GameBase
 {
@@ -22,8 +23,10 @@ namespace Fair_Trade.GameClasses.GameBase
         private GameObject2D _firstCardThrower;
         private GameObject2D _secondCardThrower;
         public CardsBack _pseudoCardToThrow;
+        private GameObject2D _downloadCircle;
         private ThrowerAI _firstCardThrowerAI;
         private ThrowerAI _secondCardThrowerAI;
+        private Stopwatch downloadingTimer = new Stopwatch();
 
         public DownloadingScene(Window sceneViewer) : base(sceneViewer)
         {
@@ -34,23 +37,45 @@ namespace Fair_Trade.GameClasses.GameBase
             _pseudoCardToThrow.objectType = GameObject2D.GameObjectType.Visible;
             _firstCardThrower.objectType = GameObject2D.GameObjectType.Visible;
             _secondCardThrower.objectType = GameObject2D.GameObjectType.Visible;
-            _pseudoCardToThrow.Resize(new Vector2(80, 120));
-            _firstCardThrower.Resize(new Vector2(80, 120));
-            _secondCardThrower.Resize(new Vector2(80, 120));
-            _pseudoCardToThrow.MoveTo(_sceneViewerCenter + new Vector2(0, 200));
+            _pseudoCardToThrow.Resize(new Vector2(83, 126));;
+            _firstCardThrower.Resize(new Vector2(83, 126));
+            _secondCardThrower.Resize(new Vector2(83, 126));
+
+            _pseudoCardToThrow.MoveTo(_sceneViewerCenter + new Vector2(-_pseudoCardToThrow.Size().x / 2, 200));
             _firstCardThrower.MoveTo(_sceneViewerCenter + new Vector2(-_firstCardThrower.Size().x / 2 - 200, _firstCardThrower.Size().y / 2));
-            _secondCardThrower.MoveTo(_sceneViewerCenter + new Vector2(-_firstCardThrower.Size().x / 2 + 200, _firstCardThrower.Size().y / 2));
+            _secondCardThrower.MoveTo(_sceneViewerCenter + new Vector2(-_secondCardThrower.Size().x / 2 + 200, _secondCardThrower.Size().y / 2));
+
             _pseudoCardToThrow.SetSprite(CreateSprite("/Sprites/white_card.png"));
             _firstCardThrower.SetSprite(CreateSprite("/Sprites/white_card.png"));
             _secondCardThrower.SetSprite(CreateSprite("/Sprites/white_card.png"));
+
             _pseudoCardToThrow.AssignFastBoxCollider();
             _firstCardThrower.AssignFastBoxCollider();
             _secondCardThrower.AssignFastBoxCollider();
-            _firstCardThrowerAI = new ThrowerAI(_firstCardThrower);
-            _secondCardThrowerAI = new ThrowerAI(_secondCardThrower);
+            _pseudoCardToThrow.collider.SetRBToDynamic();
+            _pseudoCardToThrow.SetRotationSpeed(3f);
+
+            _firstCardThrowerAI = new ThrowerAI(_firstCardThrower, _pseudoCardToThrow.collider, _secondCardThrower);
+            _secondCardThrowerAI = new ThrowerAI(_secondCardThrower, _pseudoCardToThrow.collider, _firstCardThrower);
             _firstCardThrower.AssignAI(_firstCardThrowerAI);
             _secondCardThrower.AssignAI(_secondCardThrowerAI);
-            _pseudoCardToThrow.collider.SetRBToDynamic();
+
+            
+            _firstCardThrower.AssignAudioSource(new AudioSource(AudioSource.AudioType.OneTime));
+            _secondCardThrower.AssignAudioSource(new AudioSource(AudioSource.AudioType.OneTime));
+            _firstCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/1.wav"));
+            _secondCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/2.wav"));
+            //_firstCardThrower.AudioSource.SoundPlayer.Tag = _sceneViewer;
+            //_secondCardThrower.AudioSource.SoundPlayer.Tag = _sceneViewer;
+
+            _downloadCircle = new GameObject2D(this, Vector2.zero, Vector2.zero);
+            _downloadCircle.objectType = GameObject2D.GameObjectType.Visible;
+            _downloadCircle.Resize(new Vector2(50, 50));
+            _downloadCircle.MoveTo(_sceneViewerCenter + new Vector2(-_downloadCircle.Size().x / 2, -100));
+            _downloadCircle.SetSprite(CreateSprite("/Sprites/download_wheel_0.png"));
+            _downloadCircle.AssignAnimation(CreateAnimation("/Sprites/download_wheel_animation/"));
+            _downloadCircle.Animation.LoopAnimation();
+            _downloadCircle.Animation.SetFrameRate(8);
         }
 
         public override void GenerateScene()
@@ -59,14 +84,14 @@ namespace Fair_Trade.GameClasses.GameBase
             InstantiateObject(_firstCardThrower);
             InstantiateObject(_secondCardThrower);
             InstantiateObject(_pseudoCardToThrow);
+            InstantiateObject(_downloadCircle);
         }
 
-        Stopwatch downloadingTimer = new Stopwatch();
-        Stopwatch _frameRateCap = new Stopwatch();
         public void StartSceneRoutines()
         {
             _actionStarted = true;
-            downloadingTimer.Start(); _frameRateCap.Start();
+            downloadingTimer.Restart();
+            _downloadCircle.Animation.Play();
             (_sceneViewer as Download_Page).Dispatcher.BeginInvoke(DispatcherPriority.Background, () => Display());
             SceneRoutines();
             //Parallel.Invoke(
@@ -74,7 +99,8 @@ namespace Fair_Trade.GameClasses.GameBase
             //() => (_firstCardThrower.AI as ThrowerAI).SearchForACard()
             //() => (_secondCardThrower.AI as ThrowerAI).SearchForACard()
             //);
-            _firstCardThrowerAI.SearchForACard();
+            _firstCardThrowerAI.StartAIRoutine();
+            _secondCardThrowerAI.StartAIRoutine();
         }
         public void StopSceneRoutines()
         {
@@ -83,7 +109,6 @@ namespace Fair_Trade.GameClasses.GameBase
 
         protected override void Display()
         {
-            //(_sceneViewer as Download_Page).PrintToTb(_frameRateCap.ElapsedMilliseconds.ToString());
             if (downloadingTimer.ElapsedMilliseconds > 15000 || !_actionStarted)
             {
                 StopSceneRoutines();
@@ -93,7 +118,6 @@ namespace Fair_Trade.GameClasses.GameBase
             }  
             base.Display();
             (_sceneViewer as Download_Page).Display();
-            //(_sceneViewer as Download_Page).PrintToTb2(_frameRateCap.ElapsedMilliseconds);
             if (_actionStarted)
             {
                 Task.Delay(1000 / GameMode.maxFrameRate).Wait();
@@ -110,14 +134,17 @@ namespace Fair_Trade.GameClasses.GameBase
                     if (!_actionStarted) return;
                     base.SceneRoutines();
                     foreach (GameObject2D obj in _objectsInScene)
+                    {
+                        if (obj.Animation != null)
+                            obj.GoToNextFrameSprite();
                         if (obj.collider != null)
                         {
                             obj.collider.AffectByGravity(_actionSpeedCoefficient / GameMode.maxFrameRate);
                             obj.collider.VelocityRoutine(_actionSpeedCoefficient / GameMode.maxFrameRate);
+                            _pseudoCardToThrow.Rotate(_pseudoCardToThrow.GetRotationSpeed());
                         }
+                    }
                 }
-
-                //Parallel.Invoke(() => SceneRoutines());
             });
         }
 

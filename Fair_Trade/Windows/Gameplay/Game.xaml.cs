@@ -30,7 +30,7 @@ namespace Fair_Trade
             _gameScene.GenerateScene();
 
             Download_Page d = new Download_Page();
-            d.ShowDialog();
+            d.Show();
         }
     }
 }

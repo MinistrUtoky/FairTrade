@@ -20,7 +20,9 @@ namespace Fair_Trade.GameClasses.Engine
         protected float mass = 0;
         private Vector2 _velocity = Vector2.zero;
 
-        public Vector2 v { get { return _velocity; } }
+        public GameObject2D Parent() => _parentalGameObject;
+
+        public Vector2 VEL { get { return _velocity; } }
         public void SetRBToStatic() { _rigidBodyType = RigidBodyType.Static; _parentalGameObject._parentalScene.DisableGravity(); }
         public void SetRBToKinematic() { _rigidBodyType = RigidBodyType.Kinematic; _parentalGameObject._parentalScene.DisableGravity(); }
         public void SetRBToDynamic() { _rigidBodyType = RigidBodyType.Dynamic; _parentalGameObject._parentalScene.EnableGravity(); }

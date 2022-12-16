@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fair_Trade"
         mc:Ignorable="d" Closing="Download_Page_Closing"
-        Title="Download_Page" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
+        Title="Download_Page" Topmost="True" WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" Background="Black" Height="450" Width="800">
     <Canvas x:Name="downloadingPageCanvas">
         <UIElement x:Name="gameEngineGizmo"></UIElement>
     </Canvas>

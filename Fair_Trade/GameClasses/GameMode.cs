@@ -14,7 +14,7 @@ namespace Fair_Trade.GameClasses
     public static class GameMode
     {
         public static string gameMode;
-        public static int maxFrameRate = 50;
+        public const int maxFrameRate = 50;
 
         private static int[] _screenResolution = new int[2] { 800, 480 };
         private static string _botsDifficulty = "Normal";
@@ -23,6 +23,7 @@ namespace Fair_Trade.GameClasses
         private static int _SFXLevel = 100;
         private static bool _animationsOn = true;
         private static bool _chatIsBlocked = false;
+        
 
         private static List<int[]> _possibleResolutions = new List<int[]> {
             new int[2] { 800, 480 }, new int[2] { 800, 600 }, new int[2] { 960, 640 },

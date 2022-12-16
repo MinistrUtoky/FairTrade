@@ -20,6 +20,8 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using static Fair_Trade.GameClasses.GameBase.DownloadingScene;
 using System.Drawing;
+using Fair_Trade.GameClasses.GameBase.BasicCardMechanics;
+using System.Windows.Media.Media3D;
 
 namespace Fair_Trade
 {
@@ -27,40 +29,56 @@ namespace Fair_Trade
     {
         private DownloadingScene _downloadingScene;
 
+        private bool collidersAreVisible = false;
         internal Download_Page()
         {
             InitializeComponent();
-            GameMode.FormatWindow(this);
+            GameMode.FormatWindow(this);    
             _downloadingScene = new DownloadingScene(this);
             _downloadingScene.GenerateScene();
-            _downloadingScene._pseudoCardToThrow.collider.AddVelocity(new Vector2(15, 15));
+            _downloadingScene._pseudoCardToThrow.collider.AddVelocity(new Vector2(35, 0));
             _downloadingScene.StartSceneRoutines();
         }
-
-        TextBlock tb = new TextBlock { Foreground = System.Windows.Media.Brushes.White, TextWrapping = TextWrapping.Wrap };
 
         public void Display()
         {
             downloadingPageCanvas.Children.Clear();
-            tb.SetValue(Canvas.RightProperty, 0.0);
-            tb.SetValue(Canvas.BottomProperty, 0.0);
-            downloadingPageCanvas.Children.Add(tb);
             foreach (GameObject2D gameObject in _downloadingScene._objectsInScene)
                 if (gameObject.objectType == GameObject2D.GameObjectType.Visible)
                 {
-                    Image visualObj = gameObject.GetSprite();
-                    if (visualObj != null)
-                    { 
-                        visualObj.SetValue(Canvas.TopProperty, (double)-gameObject.Position().y);
-                        visualObj.SetValue(Canvas.LeftProperty, (double)gameObject.Position().x);
-                        //tb.Text = gameObject.collider.v.ToString();
-                        downloadingPageCanvas.Children.Add(visualObj);
-                    }
+                    Draw(gameObject);
+                    DrawCollider(gameObject);
                 }
         }
+        private void Draw(GameObject2D gameObject)
+        {
+            Image visualObj = gameObject.Sprite;
+            if (visualObj != null)
+            {
+                visualObj.SetValue(Canvas.TopProperty, (double)-gameObject.Position().y);
+                visualObj.SetValue(Canvas.LeftProperty, (double)gameObject.Position().x);
+                RotateTransform rt = new RotateTransform(gameObject.Rotation());
+                rt.CenterX = (gameObject.Pivot().x - gameObject.Position().x); rt.CenterY = (-gameObject.Pivot().y + gameObject.Position().y);
+                visualObj.RenderTransform = rt;
+                downloadingPageCanvas.Children.Add(visualObj);
 
-        public void PrintToTb(string s) => tb.Text = s;
-        public void PrintToTb2(long s) => tb.Text = (s - Int64.Parse(tb.Text)).ToString();
+            }
+        }
+
+        private void DrawCollider(GameObject2D gameObject)
+        {
+            if (collidersAreVisible)
+                if (gameObject.collider != null)
+                {
+                    System.Windows.Shapes.Rectangle r = gameObject.collider.Borderline();
+                    r.SetValue(Canvas.TopProperty, (double)-gameObject.collider.Position().y);
+                    r.SetValue(Canvas.LeftProperty, (double)gameObject.collider.Position().x);
+                    RotateTransform rt = new RotateTransform(gameObject.collider.Rotation());
+                    rt.CenterX = (gameObject.collider.Pivot().x - gameObject.collider.Position().x); rt.CenterY = (-gameObject.collider.Pivot().y + gameObject.collider.Position().y);
+                    r.RenderTransform = rt;
+                    downloadingPageCanvas.Children.Add(r);
+                }
+        }
 
         private void Download_Page_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
