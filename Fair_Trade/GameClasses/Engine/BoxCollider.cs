@@ -37,7 +37,7 @@ namespace Fair_Trade.GameClasses.Engine
             _pivot = new Vector2(topLeftPoint.x + size.x / 2, topLeftPoint.y - size.y / 2);
             _rotation = rotation;
             _borderline = new System.Windows.Shapes.Rectangle(); //((int)topLeftPoint.x, (int)topLeftPoint.y, (int)size.x, (int)size.y);
-            _borderline.Width = size.x; _borderline.Height = size.y; _borderline.Stroke = Brushes.Red; _borderline.StrokeThickness = 5;
+            _borderline.Width = size.x; _borderline.Height = size.y; _borderline.Stroke = Brushes.Red; _borderline.StrokeThickness = 3;
         }
 
         public BoxCollider(GameObject2D parent, float topY, float leftX, float height, float width, float rotation, float mass = 0)
@@ -49,9 +49,10 @@ namespace Fair_Trade.GameClasses.Engine
             _pivot = new Vector2(leftX + _size.x / 2, topY - _size.y / 2);
             _rotation = rotation;
             _borderline = new System.Windows.Shapes.Rectangle(); //((int)leftX, (int)topY, (int)width, (int)height);
-            _borderline.Width = width; _borderline.Height = height; _borderline.Stroke = Brushes.Red; _borderline.StrokeThickness = 5;
+            _borderline.Width = width; _borderline.Height = height; _borderline.Stroke = Brushes.Red; _borderline.StrokeThickness = 3;
         }
 
+        public void AngleToZero() => _rotation = 0;
         public void Rotate(float angle) { _rotation = (_rotation + angle)%360f;  }
         public void MoveTo(Vector2 newPos) { _position = new Vector2(newPos.x, newPos.y); Repivot(); }//_borderline.Offset(new System.Drawing.Point((int)(newPos.x - _borderline.Left), (int)(newPos.y - _borderline.Top)));
         public void Resize(Vector2 newSize) { _size = newSize; Repivot(); }

@@ -53,7 +53,7 @@ namespace Fair_Trade.GameClasses.GameBase
             _firstCardThrower.AssignFastBoxCollider();
             _secondCardThrower.AssignFastBoxCollider();
             _pseudoCardToThrow.collider.SetRBToDynamic();
-            _pseudoCardToThrow.SetRotationSpeed(3f);
+            _pseudoCardToThrow.SetRotationSpeed(-3f);
 
             _firstCardThrowerAI = new ThrowerAI(_firstCardThrower, _pseudoCardToThrow.collider, _secondCardThrower);
             _secondCardThrowerAI = new ThrowerAI(_secondCardThrower, _pseudoCardToThrow.collider, _firstCardThrower);
@@ -65,8 +65,6 @@ namespace Fair_Trade.GameClasses.GameBase
             _secondCardThrower.AssignAudioSource(new AudioSource(AudioSource.AudioType.OneTime));
             _firstCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/1.wav", AudioSource.AudioType.OneTime));
             _secondCardThrower.AudioSource.SetPlayer(CreateAudio("/Audio/Sounds/2.wav", AudioSource.AudioType.OneTime));
-            //_firstCardThrower.AudioSource.SoundPlayer.Tag = _sceneViewer;
-            //_secondCardThrower.AudioSource.SoundPlayer.Tag = _sceneViewer;
 
             _downloadCircle = new GameObject2D(this, Vector2.zero, Vector2.zero);
             _downloadCircle.objectType = GameObject2D.GameObjectType.Visible;
@@ -109,11 +107,12 @@ namespace Fair_Trade.GameClasses.GameBase
 
         protected override void Display()
         {
-            if (downloadingTimer.ElapsedMilliseconds > 15000 || !_actionStarted)
+            if (downloadingTimer.ElapsedMilliseconds > 500 || !_actionStarted)
             {
                 StopSceneRoutines();
-                downloadingTimer.Stop();
+                downloadingTimer.Stop();                
                 (_sceneViewer as Download_Page).Close();
+                (_sceneViewer as Download_Page).StartGameRoutines();
                 return;
             }  
             base.Display();

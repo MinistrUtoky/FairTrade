@@ -17,7 +17,7 @@ namespace Fair_Trade.GameClasses.GameBase.AIs
         private System.Windows.Controls.Image sadFaceSprite;
         public ThrowerAI(GameObject2D owner, BoxCollider pseudoCardsCollider, GameObject2D opponent) : base(owner)
         {
-            _pseudoCardsCollider = pseudoCardsCollider; _opponent = opponent; sadFaceSprite = _owner._parentalScene.CreateSprite("/Sprites/white_card_sad.jpg");
+            _pseudoCardsCollider = pseudoCardsCollider; _opponent = opponent; sadFaceSprite = Scene.CreateSprite("/Sprites/white_card_sad.jpg");
         }
         public override void StartAIRoutine()
         {

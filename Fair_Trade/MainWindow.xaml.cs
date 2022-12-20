@@ -28,10 +28,12 @@ namespace Fair_Trade
             InitializeComponent();
             GameMode.UploadSettings();
             GameMode.FormatWindow(this);
+            
         }
 
         private void Start_Game_Click(object sender, RoutedEventArgs e)
         {
+            Scene.PlayBasicClickSound();
             GameIntroPage GIP = new GameIntroPage();
             GIP.Show();
             this.Close();
@@ -39,26 +41,32 @@ namespace Fair_Trade
 
         private void Shop_Click(object sender, RoutedEventArgs e)
         {
-            InGameShop shop = new InGameShop();
-            shop.Show();
-            this.Close();
+            Scene.PlayNotReadyPudge();
+            //Scene.PlayBasicClickSound();
+            //InGameShop shop = new InGameShop();
+            //shop.Show();
+            //this.Close();
         }
         private void Deck_Builder_Click(object sender, RoutedEventArgs e)
         {
-            DecksBuildPage shop = new DecksBuildPage();
-            shop.Show();
-            this.Close();
+            Scene.PlayNotReadyPudge();
+            //Scene.PlayBasicClickSound();
+            //DecksBuildPage shop = new DecksBuildPage();
+            //shop.Show();
+            //this.Close();
         }
 
         private void Game_Settings_Click(object sender, RoutedEventArgs e)
         {
-           GameSettings settings = new GameSettings();
+            Scene.PlayBasicClickSound();
+            GameSettings settings = new GameSettings();
             settings.Show();
             this.Close();
         }
 
         private void Game_Exit_Click(object sender, RoutedEventArgs e)
         {
+            Scene.PlayBasicClickSound();
             this.Close();
         }
     }

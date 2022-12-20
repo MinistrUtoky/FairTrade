@@ -22,16 +22,16 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Column="1" Grid.Row="1" x:Name="Play_Online" > <!-- Click="Play_Online_Click" -->
+        <Button Grid.Column="1" Grid.Row="1" x:Name="Play_Online" Background="Gray" Click="Play_With_Bots_Click">
             <TextBlock>Play Online</TextBlock>
         </Button>
-        <Button Grid.Column="3" Grid.Row="1" x:Name="Play_With_Bots" Click="Play_With_Bots_Click">
+        <Button Grid.Column="3" Grid.Row="1" x:Name="Play_With_Bots" Background="Gray" Click="Play_With_Bots_Click">
             <TextBlock>Play with Bots</TextBlock>
         </Button>
         <Button Grid.Column="1" Grid.Row="3" x:Name="Play_On_One_Screen" Click="Play_On_One_Screen_Click">
             <TextBlock>Share Play</TextBlock>
         </Button>
-        <Button Grid.Column="3" Grid.Row="3" x:Name="Tutorial"><!-- Click="Tutorial_Click" -->
+        <Button Grid.Column="3" Grid.Row="3" x:Name="Tutorial" Background="Gray" Click="Play_With_Bots_Click">
             <TextBlock>Tutorial</TextBlock>
         </Button>
     </Grid>

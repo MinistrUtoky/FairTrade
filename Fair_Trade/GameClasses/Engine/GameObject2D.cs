@@ -26,11 +26,18 @@ namespace Fair_Trade.GameClasses.Engine
         //private int _globalPosY = 0;
         protected float _rotation = 0;
         protected float _rotationSpeed = 0f;
+
         public BoxCollider collider = null;
         protected AI ai = null;
         protected Image _sprite = null;
         protected Animation _animation = null;
         protected AudioSource _audioSource = null;
+
+        protected bool _isDraggable = false;
+        protected bool _isDragged = false;
+        private Vector2 _dragEndPosition;
+        private float _dragStartRotation;
+
 
         public Vector2 Size() => _size;
         public Vector2 Position() => _position;
@@ -39,6 +46,13 @@ namespace Fair_Trade.GameClasses.Engine
         public void SetRotationSpeed(float angle) => _rotationSpeed = angle;
         public float GetRotationSpeed() => _rotationSpeed;
         public void StopRotation() => _rotationSpeed = 0f;
+        public void AngleToZero() { _rotation = 0; collider.AngleToZero(); }
+        public Animation Animation { get { return _animation; } }
+        public AudioSource AudioSource { get { return _audioSource; } }
+        public bool IsDraggable { get { return _isDraggable; } }
+        public bool EnableDragging() => _isDraggable = true;
+        public bool IsDragged { get { return _isDragged; } }
+
         public AI AI { get { return ai; } }
         public GameObject2D(Scene parentalScene, Vector2 position, Vector2 size)
         {
@@ -70,8 +84,9 @@ namespace Fair_Trade.GameClasses.Engine
                 collider.Rotate(angle);
         }
 
-        public void Repivot() { 
-            _pivot = _position + new Vector2(_size.x/2,-_size.y/2); 
+        public void Repivot()
+        {
+            _pivot = _position + new Vector2(_size.x / 2, -_size.y / 2);
         }
 
         /*public List<Vector2> GetDimensions()
@@ -94,19 +109,34 @@ namespace Fair_Trade.GameClasses.Engine
 
         public void SetSprite(Image sprite) => _sprite = sprite;
         public Image Sprite { get { return _sprite; } }
-        
-        public void GoToNextFrameSprite() {
+
+        public void GoToNextFrameSprite()
+        {
             if (_animation != null) _sprite = _animation.GetNextFrame();
         }
-        public Animation Animation { get { return _animation; } }
-        public void AssignAnimation(List<Image> animation) => _animation = new Animation(Animation.AnimationType.Loop, animation); 
+        public void AssignAnimation(List<Image> animation) => _animation = new Animation(Animation.AnimationType.Loop, animation);
         public void AddFrameToAnimation(Image frame) => _animation.AddFrame(frame);
-        
+
         public void AssignAI(AI aiToAssign) => ai = aiToAssign;
 
-        public AudioSource AudioSource { get { return _audioSource; } }
         public void AssignAudioSource(AudioSource audioSource) => _audioSource = audioSource;
 
         public void ResizeGameObjectAccordingToSpriteSize() { _size.x = (float)_sprite.Width; _size.y = (float)_sprite.Height; }
+
+        
+        public void StartDragging()
+        {
+            _isDragged = true;
+            _dragEndPosition = _position;
+            _dragStartRotation = _rotation;
+        }
+
+        public void StopDragging() {             
+            _isDragged = false;
+            MoveTo(_dragEndPosition);
+            Rotate(_dragStartRotation);
+        }
+
+        public void ChangeDragEndPosition(Vector2 newDragEndPos) => _dragEndPosition = newDragEndPos;
     }
 }

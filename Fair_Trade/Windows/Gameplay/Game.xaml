@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Fair_Trade"
         mc:Ignorable="d"
         Title="Game"  WindowStyle="None" WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True" Background="Black" Height="450" Width="800">
-    <!--<Grid>     
+        AllowsTransparency="True" Background="Black" Height="480" Width="800">
+    <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="5*"/>
@@ -15,7 +15,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
-                <RowDefinition Height="16*"/> 
+                <RowDefinition Height="16*"/>
                 <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"/>
@@ -42,20 +42,20 @@
                     <ColumnDefinition Width="10*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
-            
+
         </Grid>
-        
+
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="14*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="175*"/>
+                <ColumnDefinition Width="25*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="15*"/>
                 <RowDefinition Height="7*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Grid.RowSpan="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20*"/>
                     <ColumnDefinition Width="2*"/>
@@ -75,8 +75,9 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Grid>
-    </Grid>-->
-    <Canvas x:Name="mainCanvas">
-        
+    </Grid>
+    <Canvas Canvas.ZIndex="3" MouseDown="MouseDownEvent"></Canvas>
+        <Button x:Name="backButton" Content="Leave" Height="50" Width="50"></Button>-->
+    <Canvas x:Name="mainCanvas" >
     </Canvas>
 </Window>

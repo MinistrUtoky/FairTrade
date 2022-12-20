@@ -9,6 +9,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
+using System.Windows;
 
 namespace Fair_Trade.GameClasses.Engine
 {
@@ -43,6 +44,6 @@ namespace Fair_Trade.GameClasses.Engine
             {
                 _mediaPlayer.Play();
             }
-        }
+        }        
     }
 }

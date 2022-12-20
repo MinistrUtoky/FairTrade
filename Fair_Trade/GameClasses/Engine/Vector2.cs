@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace Fair_Trade.GameClasses.Engine
@@ -24,6 +25,7 @@ namespace Fair_Trade.GameClasses.Engine
         public static Vector2 operator -(Vector2 vector1, Vector2 vector2) => (vector1 + -vector2);
         public static Vector2 operator *(float coef, Vector2 vector) => new Vector2(vector.x * coef, vector.y * coef);
         public static Vector2 operator *(Vector2 vector, float coef) => new Vector2(vector.x * coef, vector.y * coef);
+        public static Vector2 PointToVector(Point point) => new Vector2((float)point.X, -(float)point.Y);
         public static void Rotate(ref Vector2 point, Vector2 relativeTo, float angle) {
             point -= relativeTo;
             point = new Vector2((float)(point.x * Math.Cos(angle * Math.PI / 180) - point.y * Math.Sin(angle * Math.PI / 180)),

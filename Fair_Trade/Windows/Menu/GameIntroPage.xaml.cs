@@ -1,4 +1,5 @@
 ﻿using Fair_Trade.GameClasses;
+using Fair_Trade.GameClasses.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,26 @@ namespace Fair_Trade
             g.Show();
             this.Close();
         }
-        private void Play_Online_Click(object sender, RoutedEventArgs e) => GameStart("Multiplayer");
-        private void Play_With_Bots_Click(object sender, RoutedEventArgs e) => GameStart("Bots");
-        private void Play_On_One_Screen_Click(object sender, RoutedEventArgs e) => GameStart("OneScreen");
-        private void Tutorial_Click(object sender, RoutedEventArgs e) => GameStart("Tutorial");
+        private void Play_Online_Click(object sender, RoutedEventArgs e)
+        {
+            //GameStart("Multiplayer");
+            //Scene.PlayBasicClickSound();
+            Scene.PlayNotReadyPudge();
+        }
+        private void Play_With_Bots_Click(object sender, RoutedEventArgs e) {
+            //GameStart("Bots");
+            //Scene.PlayBasicClickSound();
+            Scene.PlayNotReadyPudge();
+        }
+        private void Play_On_One_Screen_Click(object sender, RoutedEventArgs e)
+        {
+            Scene.PlayBasicClickSound();
+            GameStart("OneScreen"); 
+        }
+        private void Tutorial_Click(object sender, RoutedEventArgs e) {
+            //GameStart("Tutorial");
+            //Scene.PlayBasicClickSound();
+            Scene.PlayNotReadyPudge();
+        }
     }
 }

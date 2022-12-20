@@ -28,7 +28,8 @@ namespace Fair_Trade
     public partial class Download_Page : Window
     {
         private DownloadingScene _downloadingScene;
-        private bool collidersAreVisible = false;
+        private Game _gameWindow;
+        private bool _collidersAreVisible = false;
         internal Download_Page()
         {
             InitializeComponent();
@@ -39,41 +40,45 @@ namespace Fair_Trade
             _downloadingScene.StartSceneRoutines();
         }
 
+        public void SetGameWindow(Game gameWindow) => _gameWindow = gameWindow;
+        public void StartGameRoutines() => _gameWindow.StartGameRoutines();
+
         public void Display()
         {
             downloadingPageCanvas.Children.Clear();
             foreach (GameObject2D gameObject in _downloadingScene._objectsInScene)
-                if (gameObject.objectType == GameObject2D.GameObjectType.Visible)
-                {
-                    Draw(gameObject);
-                    DrawCollider(gameObject);
-                    PlaySound(gameObject);
-                }
+            {
+                Draw(gameObject);
+                DrawCollider(gameObject);
+                PlaySound(gameObject);
+            }
         }
         private void Draw(GameObject2D gameObject)
-        {
-            Image visualObj = gameObject.Sprite;
-            if (visualObj != null)
+        {   
+            if (gameObject.objectType == GameObject2D.GameObjectType.Visible)
             {
-                visualObj.SetValue(Canvas.TopProperty, (double)-gameObject.Position().y);
-                visualObj.SetValue(Canvas.LeftProperty, (double)gameObject.Position().x);
-                RotateTransform rt = new RotateTransform(gameObject.Rotation());
-                rt.CenterX = (gameObject.Pivot().x - gameObject.Position().x); rt.CenterY = (-gameObject.Pivot().y + gameObject.Position().y);
-                visualObj.RenderTransform = rt;
-                downloadingPageCanvas.Children.Add(visualObj);
-
+                Image visualObj = gameObject.Sprite;
+                if (visualObj != null)
+                {
+                    visualObj.SetValue(Canvas.TopProperty, (double)-gameObject.Position().y);
+                    visualObj.SetValue(Canvas.LeftProperty, (double)gameObject.Position().x);
+                    RotateTransform rt = new RotateTransform(-gameObject.Rotation());
+                    rt.CenterX = (gameObject.Pivot().x - gameObject.Position().x); rt.CenterY = (-gameObject.Pivot().y + gameObject.Position().y);
+                    visualObj.RenderTransform = rt;
+                    downloadingPageCanvas.Children.Add(visualObj);                    
+                }
             }
         }
 
         private void DrawCollider(GameObject2D gameObject)
         {
-            if (collidersAreVisible)
+            if (_collidersAreVisible)
                 if (gameObject.collider != null)
                 {
                     System.Windows.Shapes.Rectangle r = gameObject.collider.Borderline();
                     r.SetValue(Canvas.TopProperty, (double)-gameObject.collider.Position().y);
                     r.SetValue(Canvas.LeftProperty, (double)gameObject.collider.Position().x);
-                    RotateTransform rt = new RotateTransform(gameObject.collider.Rotation());
+                    RotateTransform rt = new RotateTransform(-gameObject.collider.Rotation());
                     rt.CenterX = (gameObject.collider.Pivot().x - gameObject.collider.Position().x); rt.CenterY = (-gameObject.collider.Pivot().y + gameObject.collider.Position().y);
                     r.RenderTransform = rt;
                     downloadingPageCanvas.Children.Add(r);

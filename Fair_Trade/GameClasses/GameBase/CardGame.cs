@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Fair_Trade.GameClasses.Engine;
 using System.Windows;
 using System.Windows.Threading;
+using System.Security.RightsManagement;
+using System.Windows.Input;
 
 namespace Fair_Trade.GameClasses.GameBase
 {
@@ -19,19 +21,23 @@ namespace Fair_Trade.GameClasses.GameBase
         public class Usurer : PlayerClass { public Usurer() { _startMoney = 150; _startHealth = 30; _startHandsCapacity = 5; } }
 
         Player firstPlayer; Player secondPlayer;
+        private Player _currentPlayer;
+        public Player CurrentPlayer { get { return _currentPlayer; } }
         public int _boardCapacity = 5;
 
         // TEMPORARY SUBSTITUDE!!! SHOULD BE REPLACED SOMEDAY :O
-        private PlayerClass defaultClass = new Merchant();
+        public PlayerClass firstPlayerDefaultClass = new Merchant();
+        public PlayerClass secondPlayerDefaultClass = new Merchant();
         public List<Card> firstPlayerDefaultStartDeck = new List<Card>();
         public List<Card> secondPlayerDefaultStartDeck = new List<Card>();
+        public List<CardField> firstPlayerCardMainFields = new List<CardField>();
+        public List<CardField> secondPlayerCardMainFields = new List<CardField>();
+        public List<CardField> firstPlayerCardExtraFields = new List<CardField>();
+        public List<CardField> secondPlayerCardExtraFields = new List<CardField>();
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-        public CardGame(Window sceneViewer) : base(sceneViewer)
-        {
-
-        }
+        public CardGame(Window sceneViewer) : base(sceneViewer) { }
 
 
         public override void GenerateScene()
@@ -42,6 +48,7 @@ namespace Fair_Trade.GameClasses.GameBase
 
         public void StartAnotherPlayersTurn(Player player)
         {
+            _currentPlayer = player;
             player.StartTurn();
         }
 
@@ -50,42 +57,83 @@ namespace Fair_Trade.GameClasses.GameBase
             // TEMPORARY!!!
             for (int i = 0; i < 30; i++)
             {
-                Card card = new Card(this, Vector2.zero, new Vector2(83, 126), 0, firstPlayer);
-                card.objectType = GameObject2D.GameObjectType.Visible;
+                Card card = new Card(this, Vector2.zero,
+                    new Vector2(SceneViewerWidth() * 3f / 29f, SceneViewerHeight() * 40f / 143f), 0, firstPlayer);
                 card.SetSprite(CreateSprite("/Sprites/white_card_sad.jpg"));
+                card.AssignFastBoxCollider();
                 firstPlayerDefaultStartDeck.Add(card);
             }
             for (int i = 0; i < 30; i++)
             {
-                Card card = new Card(this, Vector2.zero, new Vector2(83, 126), 0, secondPlayer);
-                card.objectType = GameObject2D.GameObjectType.Visible;
-                card.SetSprite(CreateSprite("/Sprites/white_card_sad.jpg"));
+                Card card = new Card(this, Vector2.zero,
+                    new Vector2(SceneViewerWidth() * 3f / 29f, SceneViewerHeight() * 40f / 143f), 0, secondPlayer);
+                card.SetSprite(CreateSprite("/Sprites/white_card.png"));
+                card.AssignFastBoxCollider();
                 secondPlayerDefaultStartDeck.Add(card);
             }
+            for (int i = 0; i < 5; i++)
+            {
+                CardField cardField = new CardField(this, Vector2.zero,
+                    new Vector2(SceneViewerWidth() * 3f / 29f, SceneViewerHeight() * 40f / 143f), firstPlayer);
+                cardField.SetSprite(CreateSprite("/Sprites/white_card.png"));
+                cardField.AssignFastBoxCollider();
+                InstantiateObject(cardField);
+                firstPlayerCardMainFields.Add(cardField);
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                CardField cardField = new CardField(this, Vector2.zero,
+                    new Vector2(SceneViewerWidth() * 3f / 29f, SceneViewerHeight() * 40f / 143f), secondPlayer);
+                cardField.SetSprite(CreateSprite("/Sprites/white_card.png"));
+                cardField.AssignFastBoxCollider();
+                InstantiateObject(cardField);
+                secondPlayerCardMainFields.Add(cardField);
+            }
+            for (int j = 0; j < 2; j++)
+            {
+                CardField cardField = new CardField(this, Vector2.zero,
+                new Vector2(SceneViewerWidth() * 3f / 29f, SceneViewerHeight() * 40f / 143f), firstPlayer);
+                cardField.SetSprite(CreateSprite("/Sprites/white_card.png"));
+                cardField.AssignFastBoxCollider();
+                InstantiateObject(cardField);
+                firstPlayerCardExtraFields.Add(cardField);
+            }
+            for (int j = 0; j < 2; j++)
+            {
+                CardField cardField = new CardField(this, Vector2.zero,
+                new Vector2(SceneViewerWidth() * 3f / 29f, SceneViewerHeight() * 40f / 143f), secondPlayer);
+                cardField.SetSprite(CreateSprite("/Sprites/white_card.png"));
+                cardField.AssignFastBoxCollider();
+                InstantiateObject(cardField);
+                secondPlayerCardExtraFields.Add(cardField);
+            }
+
             // TEMPORARY!!!
-            firstPlayer = new Player(Player.Type.Human, this, defaultClass, firstPlayerDefaultStartDeck);
+
+            firstPlayer = new Player(Player.Type.Human, this, firstPlayerDefaultClass, firstPlayerDefaultStartDeck, firstPlayerCardMainFields, firstPlayerCardExtraFields);
+            _currentPlayer = firstPlayer;
             if (GameMode.gameMode == "Multiplayer" || GameMode.gameMode == "OneScreen")
             {
-                secondPlayer = new Player(Player.Type.Human, this, defaultClass, secondPlayerDefaultStartDeck);
+                secondPlayer = new Player(Player.Type.Human, this, secondPlayerDefaultClass, secondPlayerDefaultStartDeck, secondPlayerCardMainFields, secondPlayerCardExtraFields);
             }
             else
             {
-                secondPlayer = new Player(Player.Type.Bot, this, defaultClass, secondPlayerDefaultStartDeck);
+                secondPlayer = new Player(Player.Type.Bot, this, secondPlayerDefaultClass, secondPlayerDefaultStartDeck, secondPlayerCardMainFields, secondPlayerCardExtraFields);
             }
             firstPlayer.enemy = secondPlayer; secondPlayer.enemy = firstPlayer;
+            
             firstPlayer.InstantiateAllCards(); secondPlayer.InstantiateAllCards();
+            firstPlayer.DrawCardsFromDeck(firstPlayer.HandsCapacity);
+            secondPlayer.DrawCardsFromDeck(secondPlayer.HandsCapacity);
         }
 
         public void StartSceneRoutines()
         {
             _actionStarted = true;
+            _currentPlayer = firstPlayer;
+            firstPlayer.StartTurn();
             (_sceneViewer as Game).Dispatcher.BeginInvoke(DispatcherPriority.Background, () => Display());
-            SceneRoutines();
-            //Parallel.Invoke(
-            //() => SceneRoutines()
-            //() => (_firstCardThrower.AI as ThrowerAI).SearchForACard()
-            //() => (_secondCardThrower.AI as ThrowerAI).SearchForACard()
-            //);
+            Parallel.Invoke(() => SceneRoutines());
         }
         public void StopSceneRoutines()
         {
@@ -118,8 +166,15 @@ namespace Fair_Trade.GameClasses.GameBase
                             obj.GoToNextFrameSprite();
                         if (obj.collider != null)
                         {
-                            obj.collider.AffectByGravity(_actionSpeedCoefficient / GameMode.maxFrameRate);
-                            obj.collider.VelocityRoutine(_actionSpeedCoefficient / GameMode.maxFrameRate);
+                            if (obj.IsDragged)
+                            {
+                                obj.MoveTo((_sceneViewer as Game).lastMousePostition - (obj.Pivot() - obj.Position()));
+                            }
+                            else
+                            {
+                                obj.collider.AffectByGravity(_actionSpeedCoefficient / GameMode.maxFrameRate);
+                                obj.collider.VelocityRoutine(_actionSpeedCoefficient / GameMode.maxFrameRate);
+                            }
                         }
                     }
                 }

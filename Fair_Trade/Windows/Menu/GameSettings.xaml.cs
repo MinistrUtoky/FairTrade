@@ -1,4 +1,5 @@
 ﻿using Fair_Trade.GameClasses;
+using Fair_Trade.GameClasses.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,7 @@ namespace Fair_Trade.Windows.Menu
 
         private void Back_To_Main_Menu(object sender, RoutedEventArgs e)
         {
+            Scene.PlayBasicClickSound();
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
@@ -53,6 +55,7 @@ namespace Fair_Trade.Windows.Menu
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            Scene.PlayBasicClickSound();
             foreach (object grid in Settings_Panel.Children)
             {
                 if (grid.GetType() == typeof(Grid))

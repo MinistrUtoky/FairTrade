@@ -13,6 +13,7 @@ using System.Media;
 using System.Windows.Media.Imaging;
 using System.Reflection;
 using System.Windows.Media;
+using static Fair_Trade.GameClasses.Engine.AudioSource;
 
 namespace Fair_Trade.GameClasses.Engine
 {
@@ -54,9 +55,9 @@ namespace Fair_Trade.GameClasses.Engine
             _objectsInScene.Add(obj);
         }
 
-        public Image CreateSprite(string imgSrc)
+        public static Image CreateSprite(string imgSrc)
         {
-            Image imageSprite = new Image(); 
+            Image imageSprite = new Image();
             BitmapImage bitmapImg = new BitmapImage(); bitmapImg.BeginInit();
             bitmapImg.UriSource = new Uri(imgSrc, UriKind.Relative); bitmapImg.EndInit();
             imageSprite.Stretch = System.Windows.Media.Stretch.None;
@@ -74,14 +75,31 @@ namespace Fair_Trade.GameClasses.Engine
             foreach (string imageSource in imageSources) newAnimation.Add(CreateSprite(Path.Combine(folderName, Path.GetFileName(imageSource))));
             return newAnimation;
         }
-        public MediaPlayer CreateAudio(string audioSrc, AudioSource.AudioType audioType)
+        public static MediaPlayer CreateAudio(string audioSrc, AudioSource.AudioType audioType)
         {
             MediaPlayer mp = new MediaPlayer();
             Uri uri = new Uri(Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName) + audioSrc);
             mp.Open(uri);
-            if (audioType == AudioSource.AudioType.OneTime) mp.Volume = 0.5 * (double)GameMode.GetSFXLevel()/100.0;
+            if (audioType == AudioSource.AudioType.OneTime) mp.Volume = 0.5 * (double)GameMode.GetSFXLevel() / 100.0;
             else mp.Volume = 0.5 * (double)GameMode.GetMusicLevel() / 100.0;
             return mp;
+        }
+        
+        
+        public static void PlayBasicClickSound()
+        {
+            AudioSource basicClickSound = new AudioSource(AudioType.OneTime);
+            basicClickSound.SetPlayer(CreateAudio("/Audio/Sounds/click.wav", AudioSource.AudioType.OneTime));
+            basicClickSound.Play();
+            basicClickSound.MediaPlayer.Play();
+        }
+
+        public static void PlayNotReadyPudge()
+        {
+            AudioSource notReadyElementPudge = new AudioSource(AudioType.OneTime);
+            notReadyElementPudge.SetPlayer(CreateAudio("/Audio/Sounds/pudge.mpeg", AudioSource.AudioType.OneTime));
+            notReadyElementPudge.Play();
+            notReadyElementPudge.MediaPlayer.Play();
         }
     }
 }
