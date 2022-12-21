@@ -107,7 +107,7 @@ namespace Fair_Trade.GameClasses.GameBase
 
         protected override void Display()
         {
-            if (downloadingTimer.ElapsedMilliseconds > 500 || !_actionStarted)
+            if (downloadingTimer.ElapsedMilliseconds > 15000 || !_actionStarted)
             {
                 StopSceneRoutines();
                 downloadingTimer.Stop();                

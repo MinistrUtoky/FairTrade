@@ -36,7 +36,7 @@ namespace Fair_Trade.GameClasses.Engine
         protected bool _isDraggable = false;
         protected bool _isDragged = false;
         private Vector2 _dragEndPosition;
-        private float _dragStartRotation;
+        private float _dragEndRotation;
 
 
         public Vector2 Size() => _size;
@@ -128,15 +128,16 @@ namespace Fair_Trade.GameClasses.Engine
         {
             _isDragged = true;
             _dragEndPosition = _position;
-            _dragStartRotation = _rotation;
+            _dragEndRotation = _rotation;
         }
 
         public void StopDragging() {             
             _isDragged = false;
             MoveTo(_dragEndPosition);
-            Rotate(_dragStartRotation);
+            Rotate(_dragEndRotation);
         }
 
         public void ChangeDragEndPosition(Vector2 newDragEndPos) => _dragEndPosition = newDragEndPos;
+        public void ChangeDragEndRotation(float newDragEndAngle) => _dragEndRotation = newDragEndAngle;
     }
 }

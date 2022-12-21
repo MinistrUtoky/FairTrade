@@ -191,6 +191,7 @@ namespace Fair_Trade
                                     if (obj.collider.CheckOnIntersectionWith(cursor.collider))
                                     {
                                         _draggedObject.ChangeDragEndPosition(obj.Position());
+                                        _draggedObject.ChangeDragEndRotation(0);
                                         (_draggedObject as Card).Disable();
                                         _gameScene.CurrentPlayer.PlayCardFromHand(_draggedObject as Card);
                                         _dragStarted = false;
@@ -199,7 +200,7 @@ namespace Fair_Trade
                             }
                     }
                     _draggedObject.StopDragging();
-                _draggedObject.AngleToZero();
+                    //_draggedObject.AngleToZero();
             }
         }
     }

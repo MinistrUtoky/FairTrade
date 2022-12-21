@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Viqtop\source\repos\Fair_Trade\Fair_Trade\obj\Debug\net6.0-windows\
+C:\Users\Viqtop\source\repos\FairTrade\Fair_Trade\obj\Debug\net6.0-windows\
 Fair_Trade
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\Viqtop\source\repos\Fair_Trade\Fair_Trade\App.xaml
+C:\Users\Viqtop\source\repos\FairTrade\Fair_Trade\App.xaml
 7822580857
 
 32-2031161232
-194-200944676
+194-1797456590
 MainWindow.xaml;Windows\Gameplay\Download_Page.xaml;Windows\Gameplay\Game.xaml;Windows\Menu\DecksBuildPage.xaml;Windows\Menu\GameIntroPage.xaml;Windows\Menu\GameSettings.xaml;Windows\Menu\InGameShop.xaml;
 
-True
+False
 

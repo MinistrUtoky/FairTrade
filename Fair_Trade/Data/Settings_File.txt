@@ -1,5 +1,5 @@
 800x480
-Easy
+Hard
 False
 100
 100
